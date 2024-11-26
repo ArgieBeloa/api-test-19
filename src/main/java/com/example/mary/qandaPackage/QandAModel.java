@@ -3,29 +3,46 @@ package com.example.mary.qandaPackage;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 
 
 @Document(collection = "qandadbcollection")
 public class QandAModel {
 
 
-
-
-    @Id
     private String id;
-    private String question;
-    private String answer;
     private String subjectId;
+    private List<QuestionAnswerPair> questions;
 
+    // Inner class to represent a question-answer pair
+    public static class QuestionAnswerPair {
+        private String question;
+        private String answer;
 
-    // Constructors
-    public QandAModel () {}
+        // Constructors, getters, and setters
+        public QuestionAnswerPair(String question, String answer) {
+            this.question = question;
+            this.answer = answer;
+        }
 
-    public QandAModel(String subjectId, String question, String answer) {
-        this.subjectId = subjectId;
-        this.question = question;
-        this.answer = answer;
+        public String getQuestion() {
+            return question;
+        }
+
+        public void setQuestion(String question) {
+            this.question = question;
+        }
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public void setAnswer(String answer) {
+            this.answer = answer;
+        }
     }
+
+    // Getters and setters for QandAModel
     public String getId() {
         return id;
     }
@@ -33,6 +50,7 @@ public class QandAModel {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getSubjectId() {
         return subjectId;
     }
@@ -41,21 +59,12 @@ public class QandAModel {
         this.subjectId = subjectId;
     }
 
-
-
-
-    public String getQuestion() {
-        return question;
+    public List<QuestionAnswerPair> getQuestions() {
+        return questions;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-    public String getAnswer() {
-        return answer;
+    public void setQuestions(List<QuestionAnswerPair> questions) {
+        this.questions = questions;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
 }
